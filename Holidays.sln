@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holidays.API", "src\Holidays.API\Holidays.API.csproj", "{9D8B14A6-841B-431C-A261-E26C335AEC25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - API", "1 - API", "{B4E419F4-B49C-4FAF-B34F-07BE49052062}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Services", "2 - Services", "{91670C77-8B98-4E01-9C2A-993379994DB9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{0218673A-583E-4F3D-AF56-94EA879B9ABB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Data", "4 - Data", "{DA537DEE-F983-4D18-AC91-8A872600EE5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holidays.Domain", "src\Holidays.Domain\Holidays.Domain.csproj", "{336F36CD-1C67-4C7D-832D-9664919EAB58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holidays.Data", "src\Holidays.Data\Holidays.Data.csproj", "{7BE2F647-5F5B-4C33-B298-15DA479D9E66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holidays.Services", "src\Holidays.Services\Holidays.Services.csproj", "{8492F775-CD9C-41E8-8257-083AB6E32B12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9D8B14A6-841B-431C-A261-E26C335AEC25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D8B14A6-841B-431C-A261-E26C335AEC25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D8B14A6-841B-431C-A261-E26C335AEC25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D8B14A6-841B-431C-A261-E26C335AEC25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{336F36CD-1C67-4C7D-832D-9664919EAB58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{336F36CD-1C67-4C7D-832D-9664919EAB58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{336F36CD-1C67-4C7D-832D-9664919EAB58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{336F36CD-1C67-4C7D-832D-9664919EAB58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BE2F647-5F5B-4C33-B298-15DA479D9E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BE2F647-5F5B-4C33-B298-15DA479D9E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BE2F647-5F5B-4C33-B298-15DA479D9E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BE2F647-5F5B-4C33-B298-15DA479D9E66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8492F775-CD9C-41E8-8257-083AB6E32B12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8492F775-CD9C-41E8-8257-083AB6E32B12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8492F775-CD9C-41E8-8257-083AB6E32B12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8492F775-CD9C-41E8-8257-083AB6E32B12}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9D8B14A6-841B-431C-A261-E26C335AEC25} = {B4E419F4-B49C-4FAF-B34F-07BE49052062}
+		{336F36CD-1C67-4C7D-832D-9664919EAB58} = {0218673A-583E-4F3D-AF56-94EA879B9ABB}
+		{7BE2F647-5F5B-4C33-B298-15DA479D9E66} = {DA537DEE-F983-4D18-AC91-8A872600EE5C}
+		{8492F775-CD9C-41E8-8257-083AB6E32B12} = {91670C77-8B98-4E01-9C2A-993379994DB9}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {124D7C64-21ED-43DB-976F-36BFB6FD30B4}
+	EndGlobalSection
+EndGlobal
