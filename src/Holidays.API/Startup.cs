@@ -1,4 +1,5 @@
 using Holidays.API.Configurations;
+using Holidays.Data.IoC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,8 +28,14 @@ namespace API.Holidays
         {
             services.AddControllers();
 
-            // Setting DBContexts
+            // DBContext
             services.AddDatabaseSetup(Configuration);
+
+            // DI
+            DI.RegisterServices(services);
+
+            // AutoMapper
+            services.AddAutoMapper(typeof(Startup));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

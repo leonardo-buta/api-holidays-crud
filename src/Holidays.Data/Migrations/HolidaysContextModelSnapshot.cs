@@ -91,6 +91,41 @@ namespace Holidays.Data.Migrations
                     b.ToTable("HolidayVariableDates");
                 });
 
+            modelBuilder.Entity("Holidays.Domain.Models.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Active = true,
+                            Login = "admin",
+                            Password = "$2a$11$.s5nyT0X8zhfGCUmG.IMvOcCEMNE3rPIEmxvnYIwf2WtMQ5h0oyHm"
+                        });
+                });
+
             modelBuilder.Entity("Holidays.Domain.Models.HolidayVariableDate", b =>
                 {
                     b.HasOne("Holidays.Domain.Models.Holiday", "Holiday")

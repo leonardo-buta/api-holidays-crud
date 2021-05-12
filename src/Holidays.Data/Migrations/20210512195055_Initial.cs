@@ -26,6 +26,21 @@ namespace Holidays.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Login = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false),
+                    Password = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false),
+                    Active = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "HolidayVariableDates",
                 columns: table => new
                 {
@@ -46,6 +61,11 @@ namespace Holidays.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Active", "Login", "Password" },
+                values: new object[] { 1, true, "admin", "$2a$11$.s5nyT0X8zhfGCUmG.IMvOcCEMNE3rPIEmxvnYIwf2WtMQ5h0oyHm" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_HolidayVariableDates_HolidayId",
                 table: "HolidayVariableDates",
@@ -56,6 +76,9 @@ namespace Holidays.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "HolidayVariableDates");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Holidays");
