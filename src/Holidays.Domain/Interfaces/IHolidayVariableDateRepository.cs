@@ -4,6 +4,5 @@ namespace Holidays.Domain.Interfaces
 {
     public interface IHolidayVariableDateRepository : IRepository<HolidayVariableDate>
     {
-        
     }
 }

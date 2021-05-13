@@ -2,7 +2,6 @@
 using Holidays.Domain.Interfaces;
 using Holidays.Services.DTO;
 using Holidays.Services.Interfaces;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Holidays.Services.Services

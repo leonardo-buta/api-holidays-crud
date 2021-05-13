@@ -1,5 +1,6 @@
 using Holidays.API.Configurations;
 using Holidays.Data.IoC;
+using Holidays.Services.AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,7 +36,7 @@ namespace API.Holidays
             DI.RegisterServices(services);
 
             // AutoMapper
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(MappingProfile));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
