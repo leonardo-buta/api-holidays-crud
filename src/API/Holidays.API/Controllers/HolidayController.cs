@@ -1,4 +1,5 @@
-﻿using Holidays.Services.Interfaces;
+﻿using Holidays.Services.DTO;
+using Holidays.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -21,12 +22,19 @@ namespace Holidays.API.Controllers
         }
 
         [HttpGet]
-        [Route("LoadHolidays")]
-        public async Task<IActionResult> LoadHolidays()
+        [Route("InputHolidays")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> InputHolidays()
         {
-            await _holidayAppService.LoadHolidays();
-
+            await _holidayAppService.InputHolidays();
             return Ok();
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<HolidayDTO>>> Get()
+        {
+            return Ok(await _holidayAppService.GetAllHolidays());
         }
     }
 }

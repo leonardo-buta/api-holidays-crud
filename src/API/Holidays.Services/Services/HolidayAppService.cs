@@ -3,6 +3,7 @@ using Holidays.Domain.Interfaces;
 using Holidays.Domain.Models;
 using Holidays.Services.DTO;
 using Holidays.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace Holidays.Services.Services
             _holidayVariableDateRepository = holidayVariableDateRepository;
         }
 
-        public async Task LoadHolidays()
+        public async Task InputHolidays()
         {
             string json = string.Empty;
 
@@ -50,17 +51,18 @@ namespace Holidays.Services.Services
                             await _holidayRepository.AddAsync(_mapper.Map<Holiday>(holiday));
                         }
                     }
-                    else if (holiday.HolidayVariableDates.Count > 0)
+                    else if (holiday.VariableDates.Count > 0)
                     {
                         var existingHoliday = await _holidayRepository.GetHolidayByTitle(holiday.Title);
 
                         if (existingHoliday == null)
                         {
+                            var e = _mapper.Map<Holiday>(holiday);
                             await _holidayRepository.AddAsync(_mapper.Map<Holiday>(holiday));
                         }
                         else
                         {
-                            foreach (var variableDate in holiday.HolidayVariableDates)
+                            foreach (var variableDate in holiday.VariableDates)
                             {
                                 var exists = existingHoliday.HolidayVariableDates.Any(x => x.Year == variableDate.Key &&
                                                                                            x.Date == variableDate.Value);
@@ -78,6 +80,12 @@ namespace Holidays.Services.Services
 
                 await _unitOfWork.CommitAsync();
             }
+        }
+
+        public async Task<List<HolidayDTO>> GetAllHolidays()
+        {
+            var holidays = await _holidayRepository.GetAll().Include(x => x.HolidayVariableDates).ToListAsync();
+            return _mapper.Map<List<HolidayDTO>>(holidays);
         }
     }
 }

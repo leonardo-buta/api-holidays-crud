@@ -6,6 +6,8 @@ namespace Holidays.Services.DTO
 {
     public class HolidayDTO
     {
+        public int Id { get; set; }
+
         public string Date { get; set; }
 
         public string Title { get; set; }
@@ -20,7 +22,6 @@ namespace Holidays.Services.DTO
 
         public string EndTime { get; set; }
 
-        [JsonProperty("variableDates")]
-        public Dictionary<string, string> HolidayVariableDates { get; set; }
+        public Dictionary<string, string> VariableDates { get; set; }
     }
 }

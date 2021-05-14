@@ -1,0 +1,92 @@
+<div class="list row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                Search
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label>Title</label>
+                        <input type="text" class="form-control" [(ngModel)]="titleSearch" placeholder="Title">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Date</label>
+                        <input type="text" class="form-control" [(ngModel)]="dateSearch" placeholder="Date">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <button type="button" class="btn btn-info mr-3" type="button" (click)="searchHoliday()">
+                            Search
+                        </button>
+                        <button type="button" class="btn btn-info" type="button" (click)="refreshList()">
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                Holidays
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="col-md-5">
+                        <h4>Holiday List</h4>
+                        <ul class="list-group">
+                            <li class="list-group-item" *ngFor="let holiday of holidays; let i = index"
+                                [class.active]="i == currentIndex" (click)="setActiveHoliday(holiday, i)">
+                                {{ holiday.date }} - {{ holiday.title }}
+                            </li>
+                        </ul>
+                        <br>
+                        <strong>Total holidays:</strong> {{ totalHolidays }}
+                    </div>
+                    <div class="col-md-6 offset-1">
+                        <div *ngIf="currentHoliday">
+                            <h4>Holiday</h4>
+                            <div>
+                                <label><strong>Title:</strong></label>
+                                {{ currentHoliday.title }}
+                            </div>
+                            <div>
+                                <label><strong>Description:</strong></label>
+                                {{ currentHoliday.description }}
+                            </div>
+                            <div>
+                                <label><strong>Legislation:</strong></label>
+                                {{ currentHoliday.legislation }}
+                            </div>
+                            <div>
+                                <label><strong>Type:</strong></label>
+                                {{ currentHoliday.type }}
+                            </div>
+                            <div>
+                                <label><strong>Start Time:</strong></label>
+                                {{ currentHoliday.startTime }}
+                            </div>
+                            <div>
+                                <label><strong>End Time:</strong></label>
+                                {{ currentHoliday.endTime }}
+                            </div>
+                            <div>
+                                <label><strong>Variable Dates:</strong></label>
+                                **
+                            </div>
+                            <a class="badge badge-warning" routerLink="/holidays/{{ currentHoliday.id }}">
+                                Edit
+                            </a>
+                        </div>
+
+                        <div *ngIf="!currentHoliday">
+                            <br />
+                            <p>Please click on a Holiday...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

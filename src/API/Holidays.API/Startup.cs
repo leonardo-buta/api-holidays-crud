@@ -37,6 +37,15 @@ namespace API.Holidays
 
             // AutoMapper
             services.AddAutoMapper(typeof(MappingProfile));
+
+            // CORS
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                                      .AllowAnyMethod()
+                                      .AllowAnyHeader());
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -49,6 +58,9 @@ namespace API.Holidays
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            // CORS
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 
