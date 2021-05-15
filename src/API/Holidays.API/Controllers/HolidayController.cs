@@ -45,13 +45,31 @@ namespace Holidays.API.Controllers
             return Ok(await _holidayAppService.GetAllHolidays());
         }
 
+        [HttpPut]
+        [Route("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Update(int id, HolidayUpdateDTO holidayDTO)
+        {
+            var exists = await _holidayAppService.ExistsHoliday(id);
+
+            if (exists)
+            {
+                await _holidayAppService.UpdateHoliday(id, holidayDTO);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         [HttpDelete]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<HolidayDTO>> Delete(int id)
         {
             var exists = await _holidayAppService.ExistsHoliday(id);
-            
+
             if (exists)
             {
                 await _holidayAppService.DeleteHoliday(id);
@@ -60,7 +78,7 @@ namespace Holidays.API.Controllers
             else
             {
                 return NotFound();
-            }            
+            }
         }
     }
 }

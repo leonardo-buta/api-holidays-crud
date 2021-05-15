@@ -41,8 +41,7 @@ export class HolidaysDetailsComponent implements OnInit {
     this.holidayService.update(this.currentHoliday.id, this.currentHoliday)
       .subscribe(
         response => {
-          this.message = response.message;
-          console.log(response);
+          this.message = 'Updated successfully';
         },
         error => {
           this.message = error.message;

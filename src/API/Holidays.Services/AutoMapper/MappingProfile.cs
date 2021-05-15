@@ -13,6 +13,9 @@ namespace Holidays.Services.AutoMapper
                 .ForMember(dest => dest.VariableDates, opt => opt.MapFrom(src => src.HolidayVariableDates))
                 .ReverseMap();
 
+            CreateMap<Holiday, HolidayUpdateDTO>()
+                .ReverseMap();
+
             CreateMap<HolidayVariableDate, KeyValuePair<string, string>>()
                 .ForMember(dest => dest.Key, opt => opt.MapFrom(src => src.Year))
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Date))

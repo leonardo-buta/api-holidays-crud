@@ -100,6 +100,18 @@ namespace Holidays.Services.Services
             return await _holidayRepository.GetAll().AnyAsync(x => x.Id == id);
         }
 
+        public async Task UpdateHoliday(int id, HolidayUpdateDTO holidayDTO)
+        {
+            var holiday = await _holidayRepository.GetAll()
+                                                  .Include(x => x.HolidayVariableDates)
+                                                  .FirstOrDefaultAsync(x => x.Id == id);
+
+            _mapper.Map(holidayDTO, holiday);
+            _holidayRepository.Update(holiday);
+
+            await _unitOfWork.CommitAsync();
+        }
+
         public async Task DeleteHoliday(int id)
         {
             var variableDates = await _holidayVariableDateRepository.GetAll()
