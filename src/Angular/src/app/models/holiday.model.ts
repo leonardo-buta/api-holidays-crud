@@ -9,5 +9,5 @@ export class Holiday {
     type?: string;
     startTime?: string;
     endTime?: string;
-    holidayVariableDate? : HolidayVariableDate[];
+    variableDates? : HolidayVariableDate[];
 }

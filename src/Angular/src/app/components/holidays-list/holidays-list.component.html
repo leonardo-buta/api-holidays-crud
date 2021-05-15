@@ -38,7 +38,7 @@
                         <ul class="list-group">
                             <li class="list-group-item" *ngFor="let holiday of holidays; let i = index"
                                 [class.active]="i == currentIndex" (click)="setActiveHoliday(holiday, i)">
-                                {{ holiday.date }} - {{ holiday.title }}
+                                {{ holiday.date?.trim() ? holiday.date : 'Variable' }} - {{ holiday.title }}
                             </li>
                         </ul>
                         <br>
@@ -50,6 +50,10 @@
                             <div>
                                 <label><strong>Title:</strong></label>
                                 {{ currentHoliday.title }}
+                            </div>
+                            <div *ngIf="currentHoliday.date?.trim()">
+                                <label><strong>Date:</strong></label>
+                                {{ currentHoliday.date }}
                             </div>
                             <div>
                                 <label><strong>Description:</strong></label>
@@ -71,9 +75,11 @@
                                 <label><strong>End Time:</strong></label>
                                 {{ currentHoliday.endTime }}
                             </div>
-                            <div>
+                            <div *ngIf="!currentHoliday.date?.trim()">
                                 <label><strong>Variable Dates:</strong></label>
-                                **
+                                <div *ngFor="let item of currentHoliday.variableDates | keyvalue">
+                                    {{item.key}} - {{item.value}}
+                                </div>
                             </div>
                             <a class="badge badge-warning" routerLink="/holidays/{{ currentHoliday.id }}">
                                 Edit

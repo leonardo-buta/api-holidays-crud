@@ -1,6 +1,6 @@
 ﻿using Holidays.Domain.Enums;
-using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Holidays.Services.DTO
 {
@@ -16,6 +16,7 @@ namespace Holidays.Services.DTO
 
         public string Legislation { get; set; }
 
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public HolidayType Type { get; set; }
 
         public string StartTime { get; set; }

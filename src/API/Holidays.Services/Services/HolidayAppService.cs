@@ -57,7 +57,6 @@ namespace Holidays.Services.Services
 
                         if (existingHoliday == null)
                         {
-                            var e = _mapper.Map<Holiday>(holiday);
                             await _holidayRepository.AddAsync(_mapper.Map<Holiday>(holiday));
                         }
                         else
