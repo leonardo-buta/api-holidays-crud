@@ -31,10 +31,36 @@ namespace Holidays.API.Controllers
         }
 
         [HttpGet]
+        [Route("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<HolidayDTO>> Get(int id)
+        {
+            return Ok(await _holidayAppService.GetHoliday(id));
+        }
+
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<List<HolidayDTO>>> Get()
         {
             return Ok(await _holidayAppService.GetAllHolidays());
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<HolidayDTO>> Delete(int id)
+        {
+            var exists = await _holidayAppService.ExistsHoliday(id);
+            
+            if (exists)
+            {
+                await _holidayAppService.DeleteHoliday(id);
+                return NoContent();
+            }
+            else
+            {
+                return NotFound();
+            }            
         }
     }
 }

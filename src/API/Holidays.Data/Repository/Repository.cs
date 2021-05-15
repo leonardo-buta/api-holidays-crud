@@ -2,6 +2,7 @@
 using Holidays.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -41,6 +42,11 @@ namespace Holidays.Data.Repository
         public virtual async Task RemoveAsync(int id)
         {
             DbSet.Remove(await DbSet.FindAsync(id));
+        }
+
+        public virtual void RemoveRange(IEnumerable<TEntity> entities)
+        {
+            DbSet.RemoveRange(entities);
         }
 
         public async Task<int> SaveChangesAsync()

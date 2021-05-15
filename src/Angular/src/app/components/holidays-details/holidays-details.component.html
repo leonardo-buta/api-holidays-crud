@@ -1,1 +1,114 @@
-<p>holidays-details works!</p>
+<div>
+    <div *ngIf="currentHoliday.id" class="edit-form">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    Holiday
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" [(ngModel)]="currentHoliday.title"
+                                name="title" />
+                        </div>
+                        <div *ngIf="currentHoliday.date?.trim()" class="form-group">
+                            <label for="date">Date</label>
+                            <input type="text" class="form-control" id="title" [(ngModel)]="currentHoliday.date"
+                                name="date" />
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Description</label>
+                            <input type="text" class="form-control" id="description"
+                                [(ngModel)]="currentHoliday.description" name="description" />
+                        </div>
+                        <div class="form-group">
+                            <label for="legislation">Legislation</label>
+                            <input type="text" class="form-control" id="legislation"
+                                [(ngModel)]="currentHoliday.legislation" name="legislation" />
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <input type="text" class="form-control" id="type" [(ngModel)]="currentHoliday.type"
+                                name="type" />
+                        </div>
+                        <div class="form-group">
+                            <label for="startTime">Start Time</label>
+                            <input type="text" class="form-control" id="startTime"
+                                [(ngModel)]="currentHoliday.startTime" name="startTime" />
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime">End Time</label>
+                            <input type="text" class="form-control" id="endTime" [(ngModel)]="currentHoliday.endTime"
+                                name="endTime" />
+                        </div>
+                        <div *ngIf="!currentHoliday.date?.trim()" class="form-group">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Year</th>
+                                        <th scope="col">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of currentHoliday.variableDates | keyvalue">
+                                        <td>{{ item.key }}</td>
+                                        <td>{{ item.value }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                    <button class="badge badge-danger mr-2" (click)="open(deleteModal)">
+                        Delete
+                    </button>
+                    <button type="submit" class="badge badge-success mb-2" (click)="updateHoliday()">
+                        Update
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!currentHoliday.id">
+        <br />
+        <p>Cannot access this Holiday...</p>
+    </div>
+
+    <ng-template #updatedModal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Information</h4>
+            <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+                (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>{{ message }}</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" ngbAutofocus class="btn btn-info" (click)="modal.dismiss()">Ok</button>
+        </div>
+    </ng-template>
+
+    <ng-template #deleteModal let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-title">Holiday deletion</h4>
+            <button type="button" class="close" aria-label="Close button" aria-describedby="modal-title"
+                (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p><strong>Are you sure you want to delete <span class="text-primary">"{{currentHoliday.title}}
+                        {{currentHoliday.title}}"</span>?</strong></p>
+            <p>All information associated with this holiday will be permanently deleted.
+                <span class="text-danger">This operation can not be undone.</span>
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss()">Cancel</button>
+            <button type="button" ngbAutofocus class="btn btn-danger" (click)="deleteHoliday()">Ok</button>
+        </div>
+    </ng-template>
+</div>

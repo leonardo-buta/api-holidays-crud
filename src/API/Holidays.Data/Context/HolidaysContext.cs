@@ -20,7 +20,7 @@ namespace Holidays.Data.Context
             modelBuilder.ApplyConfiguration(new UserMap());
 
             // Seed
-            modelBuilder.Entity<User>().HasData(new User { Id = 1, Login = "admin", Password = BCrypt.Net.BCrypt.HashPassword("admin"), Active = true });
+            modelBuilder.Entity<User>().HasData(new User { Id = 1, Login = "admin", Password = "$2a$11$.s5nyT0X8zhfGCUmG.IMvOcCEMNE3rPIEmxvnYIwf2WtMQ5h0oyHm", Active = true });
 
             base.OnModelCreating(modelBuilder);
         }
