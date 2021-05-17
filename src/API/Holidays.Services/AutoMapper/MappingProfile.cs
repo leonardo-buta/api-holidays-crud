@@ -21,6 +21,9 @@ namespace Holidays.Services.AutoMapper
                 .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Date))
                 .ConstructUsing((t, ctx) => new KeyValuePair<string, string>(t.Year, t.Date))
                 .ReverseMap();
+
+            CreateMap<User, UserDTO>()
+                .ReverseMap();
         }
     }
 }

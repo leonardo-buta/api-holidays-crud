@@ -2,6 +2,7 @@
 using Holidays.Data.Repository;
 using Holidays.Data.UoW;
 using Holidays.Domain.Interfaces;
+using Holidays.Services.Auth;
 using Holidays.Services.Interfaces;
 using Holidays.Services.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,6 +25,9 @@ namespace Holidays.Data.IoC
             
             // Unit of Work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            // Auth
+            services.AddScoped<IJwtAuthManager, JwtAuthManager>();
 
             // Context
             services.AddScoped<HolidaysContext>();

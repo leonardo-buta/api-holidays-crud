@@ -46,6 +46,9 @@ namespace API.Holidays
                                       .AllowAnyMethod()
                                       .AllowAnyHeader());
             });
+
+            // JWT
+            JWTSetup.AddJWTSetup(services, Configuration);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -58,6 +61,8 @@ namespace API.Holidays
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             // CORS
             app.UseCors("CorsPolicy");

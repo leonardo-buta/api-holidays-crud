@@ -1,5 +1,6 @@
 ﻿using Holidays.Services.DTO;
 using Holidays.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ namespace Holidays.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class HolidayController : ControllerBase
     {
         private readonly IHolidayAppService _holidayAppService;

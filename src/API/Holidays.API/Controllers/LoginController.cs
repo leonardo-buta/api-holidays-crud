@@ -1,23 +1,26 @@
 ﻿using Holidays.Services.DTO;
 using Holidays.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Holidays.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class LoginController : ControllerBase
     {
         private readonly IUserAppService _userAppService;
+        private readonly IJwtAuthManager _jwtAuthManager;
 
-        public LoginController(IUserAppService userAppService)
+        public LoginController(IUserAppService userAppService, IJwtAuthManager jwtAuthManager)
         {
             _userAppService = userAppService;
+            _jwtAuthManager = jwtAuthManager;
         }
 
         [HttpPost]
@@ -25,7 +28,23 @@ namespace Holidays.API.Controllers
         {
             var user = await _userAppService.GetAsync(userDTO.Login, userDTO.Password);
 
-            return Ok();
+            if (user == null) return Unauthorized();
+
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.Name, user.Login),
+                new Claim(ClaimTypes.Role, "Admin")
+            };
+
+            var jwtResult = _jwtAuthManager.GenerateTokens(user.Login, claims, DateTime.Now);
+
+            return Ok(new
+            {
+                UserName = userDTO.Login,
+                Role = "Admin",
+                AccessToken = jwtResult.AccessToken,
+                RefreshToken = jwtResult.RefreshToken.TokenString
+            });
         }
     }
 }

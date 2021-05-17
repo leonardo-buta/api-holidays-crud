@@ -20,6 +20,8 @@ namespace Holidays.Services.Services
         public async Task<UserDTO> GetAsync(string login, string password)
         {
             var user = await _userRepository.GetUser(login);
+            if (user == null) return null;
+
             var passwordMatch = DoesPasswordMatch(password, user.Password);
 
             if (!passwordMatch) return null;

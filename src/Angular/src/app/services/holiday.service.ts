@@ -12,26 +12,26 @@ export class HolidayService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Holiday[]> {
-    return this.http.get<Holiday[]>(environment.apiUrl);
+    return this.http.get<Holiday[]>(`${environment.apiUrl}/Holiday`);
   }
 
   get(id: any): Observable<Holiday> {
-    return this.http.get(`${environment.apiUrl}/${id}`);
+    return this.http.get(`${environment.apiUrl}/Holiday/${id}`);
   }
 
   create(data: any): Observable<any> {
-    return this.http.post(environment.apiUrl, data);
+    return this.http.post(`${environment.apiUrl}/Holiday`, data);
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/${id}`, data);
+    return this.http.put(`${environment.apiUrl}/Holiday/${id}`, data);
   }
 
   delete(id: any): Observable<any> {
-    return this.http.delete(`${environment.apiUrl}/${id}`);
+    return this.http.delete(`${environment.apiUrl}/Holiday/${id}`);
   }
 
   getWithFilter(title: string, date: string): Observable<Holiday[]> {
-    return this.http.get<Holiday[]>(`${environment.apiUrl}?title=${title}&date=${date}`);
+    return this.http.get<Holiday[]>(`${environment.apiUrl}/Holiday?title=${title}&date=${date}`);
   }
 }

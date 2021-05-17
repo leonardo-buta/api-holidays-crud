@@ -1,0 +1,29 @@
+<div class="text-center mb-4">
+  <h1 class="h3 mb-3">Holidays CRUD</h1>
+</div>
+<form class="form-signin" (ngSubmit)="doLogin()">
+  <div class="form-label-group">
+    <input type="text" id="login" name="login" [(ngModel)]="login" class="form-control" placeholder="Login" required
+      autofocus />
+    <label for="login">Login</label>
+  </div>
+  <div class="form-label-group">
+    <input type="password" id="inputPassword" name="password" [(ngModel)]="password" class="form-control"
+      placeholder="Password" required />
+    <label for="inputPassword">Password</label>
+  </div>
+
+  <div class="checkbox mb-3 text-danger" *ngIf="loginError">
+    Login failed. Please try again.
+  </div>
+  <button type="submit" class="btn btn-lg btn-primary btn-block" [disabled]="busy">
+    Sign in
+  </button>
+
+  <div class="small text-secondary mt-3 d-none d-sm-flex">
+    <strong>Example login:</strong>
+    <ul>
+      <li>admin: admin</li>
+    </ul>
+  </div>
+</form>
