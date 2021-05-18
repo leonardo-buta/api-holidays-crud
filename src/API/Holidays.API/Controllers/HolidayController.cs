@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Holidays.API.Controllers
@@ -32,17 +30,31 @@ namespace Holidays.API.Controllers
             return Ok();
         }
 
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> Post(HolidayDTO holidayDTO)
+        {
+            if (holidayDTO == null) return BadRequest(new ArgumentNullException());
+
+            var holidayCreated = await _holidayAppService.CreateHoliday(holidayDTO);
+            return CreatedAtAction(nameof(Get), new { holidayCreated.Id }, holidayDTO);
+        }
+
         [HttpGet]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<HolidayDTO>> Get(int id)
         {
-            return Ok(await _holidayAppService.GetHoliday(id));
+            var holiday = await _holidayAppService.GetHoliday(id);
+
+            if (holiday == null) return NotFound();
+            return Ok(holiday);
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<List<HolidayDTO>>> Get()
+        public async Task<ActionResult<List<HolidayDTO>>> GetAll()
         {
             return Ok(await _holidayAppService.GetAllHolidays());
         }
@@ -50,6 +62,7 @@ namespace Holidays.API.Controllers
         [HttpPut]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update(int id, HolidayUpdateDTO holidayDTO)
         {
             var exists = await _holidayAppService.ExistsHoliday(id);
@@ -67,7 +80,8 @@ namespace Holidays.API.Controllers
 
         [HttpDelete]
         [Route("{id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
         {
             var exists = await _holidayAppService.ExistsHoliday(id);

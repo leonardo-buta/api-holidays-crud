@@ -7,6 +7,7 @@ namespace Holidays.Services.Interfaces
     public interface IHolidayAppService
     {
         Task InputHolidays();
+        Task<HolidayDTO> CreateHoliday(HolidayDTO holidayDTO);
         Task<HolidayDTO> GetHoliday(int id);
         Task<List<HolidayDTO>> GetAllHolidays();
         Task<bool> ExistsHoliday(int id);

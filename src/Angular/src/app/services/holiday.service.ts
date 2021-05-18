@@ -19,8 +19,8 @@ export class HolidayService {
     return this.http.get(`${environment.apiUrl}/Holiday/${id}`);
   }
 
-  create(data: any): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/Holiday`, data);
+  create(holiday: Holiday): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/Holiday`, holiday);
   }
 
   update(id: any, data: any): Observable<any> {

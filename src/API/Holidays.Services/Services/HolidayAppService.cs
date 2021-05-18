@@ -4,6 +4,7 @@ using Holidays.Domain.Models;
 using Holidays.Services.DTO;
 using Holidays.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,15 @@ namespace Holidays.Services.Services
 {
     public class HolidayAppService : IHolidayAppService
     {
+        private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IHolidayRepository _holidayRepository;
         private readonly IHolidayVariableDateRepository _holidayVariableDateRepository;
 
-        public HolidayAppService(IMapper mapper, IUnitOfWork unitOfWork, IHolidayRepository holidayRepository, IHolidayVariableDateRepository holidayVariableDateRepository)
+        public HolidayAppService(IConfiguration configuration, IMapper mapper, IUnitOfWork unitOfWork, IHolidayRepository holidayRepository, IHolidayVariableDateRepository holidayVariableDateRepository)
         {
+            _configuration = configuration;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _holidayRepository = holidayRepository;
@@ -33,7 +36,7 @@ namespace Holidays.Services.Services
 
             using (var httpClient = new HttpClient())
             {
-                json = await httpClient.GetStringAsync("https://dadosbr.github.io/feriados/nacionais.json");
+                json = await httpClient.GetStringAsync(_configuration["UrlNationalHolidaysJSON"]);
             }
 
             if (!string.IsNullOrEmpty(json))
@@ -79,6 +82,16 @@ namespace Holidays.Services.Services
 
                 await _unitOfWork.CommitAsync();
             }
+        }
+
+        public async Task<HolidayDTO> CreateHoliday(HolidayDTO holidayDTO)
+        {
+            var holiday = _mapper.Map<Holiday>(holidayDTO);
+
+            await _holidayRepository.AddAsync(holiday);
+            await _unitOfWork.CommitAsync();
+
+            return _mapper.Map<HolidayDTO>(holiday);
         }
 
         public async Task<HolidayDTO> GetHoliday(int id)
