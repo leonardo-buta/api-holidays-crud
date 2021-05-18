@@ -1,6 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { HolidayVariableDate } from 'src/app/models/holiday-variable-date.model';
 import { Holiday } from 'src/app/models/holiday.model';
 import { HolidayService } from 'src/app/services/holiday.service';
 
@@ -68,4 +69,11 @@ export class HolidaysDetailsComponent implements OnInit {
     this.modalService.open(content);
   }
 
+  addHolidayVariableDate(): void {
+    this.currentHoliday.variableDates.push(new HolidayVariableDate());
+  }
+
+  deleteHolidayVariableDate(index: number): void {
+    this.currentHoliday.variableDates.splice(index, 1);
+  }
 }

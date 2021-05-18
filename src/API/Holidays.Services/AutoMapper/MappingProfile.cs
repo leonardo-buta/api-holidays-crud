@@ -9,11 +9,19 @@ namespace Holidays.Services.AutoMapper
     {
         public MappingProfile()
         {
+            CreateMap<Holiday, HolidayInputDTO>()
+                .ForMember(dest => dest.VariableDates, opt => opt.MapFrom(src => src.HolidayVariableDates))
+                .ReverseMap();
+
             CreateMap<Holiday, HolidayDTO>()
                 .ForMember(dest => dest.VariableDates, opt => opt.MapFrom(src => src.HolidayVariableDates))
                 .ReverseMap();
 
+            CreateMap<HolidayVariableDate, HolidayVariableDateDTO>()
+                .ReverseMap();
+
             CreateMap<Holiday, HolidayUpdateDTO>()
+                .ForMember(dest => dest.VariableDates, opt => opt.MapFrom(src => src.HolidayVariableDates))
                 .ReverseMap();
 
             CreateMap<HolidayVariableDate, KeyValuePair<string, string>>()

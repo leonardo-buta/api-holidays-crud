@@ -38,7 +38,7 @@ namespace Holidays.Services.Services
 
             if (!string.IsNullOrEmpty(json))
             {
-                var holidays = JsonConvert.DeserializeObject<List<HolidayDTO>>(json);
+                var holidays = JsonConvert.DeserializeObject<List<HolidayInputDTO>>(json);
 
                 foreach (var holiday in holidays)
                 {
@@ -103,11 +103,17 @@ namespace Holidays.Services.Services
         public async Task UpdateHoliday(int id, HolidayUpdateDTO holidayDTO)
         {
             var holiday = await _holidayRepository.GetAll()
+                                                  .AsNoTracking()
                                                   .Include(x => x.HolidayVariableDates)
                                                   .FirstOrDefaultAsync(x => x.Id == id);
 
+            // Remove the variable dates
+            var variableDatesIds = holidayDTO.VariableDates.Select(x => x.Id);
+            var deletedDates = holiday.HolidayVariableDates.Where(x => !variableDatesIds.Contains(x.Id)).ToList();
+
             _mapper.Map(holidayDTO, holiday);
             _holidayRepository.Update(holiday);
+            _holidayVariableDateRepository.RemoveRange(deletedDates);
 
             await _unitOfWork.CommitAsync();
         }

@@ -42,21 +42,28 @@
                             <input type="text" class="form-control" id="endTime" [(ngModel)]="currentHoliday.endTime"
                                 name="endTime" />
                         </div>
-                        <div *ngIf="!currentHoliday.date?.trim()" class="form-group">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Year</th>
-                                        <th scope="col">Date</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let item of currentHoliday.variableDates | keyvalue">
-                                        <td>{{ item.key }}</td>
-                                        <td>{{ item.value }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        
+                        <div *ngIf="currentHoliday.variableDates.length" class="form-group">
+                            <h3>Variable Dates</h3>
+                            <hr>
+                            <button type="submit" class="badge badge-success mb-2" (click)="addHolidayVariableDate()">
+                                Add
+                            </button>
+                            <div *ngFor="let item of currentHoliday.variableDates; let i = index" class="form-row">
+                                <div class="form-group col-md-4">
+                                    <input type="text" class="form-control" [(ngModel)]="item.year"
+                                        name="item.year-{{item.id}}" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <input type="text" class="form-control" [(ngModel)]="item.date"
+                                        name="item.date-{{item.id}}" />
+                                </div>
+                                <div class="form-group col-md-4 d-flex justify-content-left">
+                                    <button type="button" class="close" aria-label="Close" (click)="deleteHolidayVariableDate(i)">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                </div>
+                            </div>
                         </div>
                     </form>
                     <button class="badge badge-danger mr-2" (click)="open(deleteModal)">

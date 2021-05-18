@@ -4,8 +4,10 @@ using System.Text.Json.Serialization;
 
 namespace Holidays.Services.DTO
 {
-    public class HolidayUpdateDTO
+    public class HolidayInputDTO
     {
+        public int Id { get; set; }
+
         public string Date { get; set; }
 
         public string Title { get; set; }
@@ -21,6 +23,6 @@ namespace Holidays.Services.DTO
 
         public string EndTime { get; set; }
 
-        public List<HolidayVariableDateDTO> VariableDates { get; set; }
+        public Dictionary<string, string> VariableDates { get; set; }
     }
 }

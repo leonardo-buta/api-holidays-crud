@@ -68,7 +68,7 @@ namespace Holidays.API.Controllers
         [HttpDelete]
         [Route("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<HolidayDTO>> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var exists = await _holidayAppService.ExistsHoliday(id);
 

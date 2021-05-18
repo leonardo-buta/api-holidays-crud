@@ -16,6 +16,7 @@
     "importHelpers": true,
     "strictPropertyInitialization": false,
     "strictNullChecks": false,
+    "suppressImplicitAnyIndexErrors": true,
     "target": "es2017",
     "module": "es2020",
     "lib": [

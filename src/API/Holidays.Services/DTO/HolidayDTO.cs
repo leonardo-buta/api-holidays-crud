@@ -23,6 +23,6 @@ namespace Holidays.Services.DTO
 
         public string EndTime { get; set; }
 
-        public Dictionary<string, string> VariableDates { get; set; }
+        public List<HolidayVariableDateDTO> VariableDates { get; set; }
     }
 }

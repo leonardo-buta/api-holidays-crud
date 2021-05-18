@@ -75,10 +75,10 @@
                                 <label><strong>End Time:</strong></label>
                                 {{ currentHoliday.endTime }}
                             </div>
-                            <div *ngIf="!currentHoliday.date?.trim()">
+                            <div *ngIf="currentHoliday.variableDates.length">
                                 <label><strong>Variable Dates:</strong></label>
-                                <div *ngFor="let item of currentHoliday.variableDates | keyvalue">
-                                    {{ item.key }} - {{ item.value }}
+                                <div *ngFor="let item of currentHoliday.variableDates">
+                                    {{ item.year }} - {{ item.date }}
                                 </div>
                             </div>
                             <a class="badge badge-warning" routerLink="/holidays/{{ currentHoliday.id }}">
